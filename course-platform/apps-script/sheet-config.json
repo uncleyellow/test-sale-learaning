@@ -1,0 +1,31 @@
+{
+  "spreadsheetId": "replace-with-your-spreadsheet-id",
+  "sharedSecret": "replace-with-shared-secret",
+  "deployUrl": "replace-with-your-apps-script-web-app-url",
+  "tabs": {
+    "registrations": {
+      "name": "registrations",
+      "headers": ["id", "name", "phone", "email", "course_type", "note", "created_at"]
+    },
+    "users": {
+      "name": "users",
+      "headers": ["id", "name", "email", "password_hash", "role", "course_type", "created_at"]
+    },
+    "exams": {
+      "name": "exams",
+      "headers": ["id", "title", "pass_score", "total_questions", "duration_minutes", "active"]
+    },
+    "questions": {
+      "name": "questions",
+      "headers": ["id", "exam_id", "question", "option_a", "option_b", "option_c", "option_d", "correct_answer", "is_critical", "explanation"]
+    },
+    "exam_results": {
+      "name": "exam_results",
+      "headers": ["id", "user_id", "exam_id", "attempt_no", "score", "passed", "failed_due_critical", "submitted_at", "answers_json"]
+    },
+    "visits": {
+      "name": "visits",
+      "headers": ["id", "ip", "page", "lang", "visited_at"]
+    }
+  }
+}

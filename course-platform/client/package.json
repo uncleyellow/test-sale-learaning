@@ -1,0 +1,19 @@
+{
+  "name": "course-platform-client",
+  "version": "1.0.0",
+  "description": "Frontend for the Course Platform",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "live-server public",
+    "build": "echo 'Build process not defined'",
+    "test": "echo 'No tests defined'"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}

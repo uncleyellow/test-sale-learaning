@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="" data-i18n-meta="meta.examDescription">
+  <title>DriveMaster</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <link href="/src/css/main.css" rel="stylesheet">
+</head>
+<body data-page-title="meta.examTitle">
+  <main class="page-shell student-page-shell">
+    <div class="container">
+      <section class="student-shell mb-4">
+        <div class="student-shell-topbar">
+          <a class="navbar-brand text-decoration-none" href="/index.html" data-i18n="common.brand">DriveMaster</a>
+          <div class="student-top-actions">
+            <div class="btn-group">
+              <button class="btn btn-outline-secondary" data-lang-switch="vi" type="button">VI</button>
+              <button class="btn btn-outline-secondary" data-lang-switch="en" type="button">EN</button>
+            </div>
+            <a class="btn btn-outline-secondary" href="/index.html" data-i18n="student.home">Trang chu</a>
+            <a class="btn btn-outline-secondary" href="/result.html" id="studentResultLink" data-i18n="student.results">Ket qua</a>
+            <button class="btn btn-primary" type="button" id="studentLogoutButton" data-i18n="student.logout">Dang xuat</button>
+          </div>
+        </div>
+        <div class="student-hero mt-4">
+          <div>
+            <span class="section-badge mb-3" data-i18n="student.badge">Khu vuc hoc vien</span>
+            <h1 class="admin-hero-title mb-2"><span data-i18n="exam.subtitle">Xin chao</span>, <span id="welcomeStudent"></span></h1>
+            <p class="admin-hero-copy mb-0" data-i18n="student.heroCopy">Day la noi de hoc vien xem khoa hoc cua minh, theo doi ket qua dat hay chua dat va lam de thi online de on tap.</p>
+          </div>
+          <div class="student-pill-group">
+            <span class="compact-badge"><i class="fa-solid fa-graduation-cap"></i><span id="studentCourseBadge">B2</span></span>
+            <span class="compact-badge"><i class="fa-solid fa-clock"></i><span id="examTimer">20:00</span></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="student-nav-pills mb-4">
+        <a class="student-nav-pill" href="#studentOverview" data-i18n="student.overviewTab">Tong quan</a>
+        <a class="student-nav-pill" href="#studentCourses" data-i18n="student.courseTab">Khoa hoc cua toi</a>
+        <a class="student-nav-pill" href="#studentHistory" data-i18n="student.historyTab">Lich su thi</a>
+        <a class="student-nav-pill" href="#studentExamSection" data-i18n="student.examTab">Lam bai thi</a>
+      </div>
+
+      <section class="row g-4 mb-4" id="studentOverview">
+        <div class="col-md-4">
+          <article class="admin-stat-card accent-blue">
+            <div class="admin-stat-icon"><i class="fa-solid fa-book"></i></div>
+            <div class="text-muted" data-i18n="student.cardCourse">Khoa hoc dang hoc</div>
+            <div class="stat-value" id="studentCurrentCourse">-</div>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="admin-stat-card accent-green">
+            <div class="admin-stat-icon"><i class="fa-solid fa-repeat"></i></div>
+            <div class="text-muted" data-i18n="student.cardAttempts">So lan da thi</div>
+            <div class="stat-value" id="studentAttemptCount">0</div>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="admin-stat-card accent-orange">
+            <div class="admin-stat-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+            <div class="text-muted" data-i18n="student.cardLatest">Lan thi gan nhat</div>
+            <div class="stat-value student-latest-status" id="studentLatestStatus">-</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="row g-4 mb-4" id="studentCourses">
+        <div class="col-lg-7">
+          <div class="dashboard-card h-100">
+            <h2 class="h4 mb-3" data-i18n="student.courseTitle">Thong tin khoa hoc cua toi</h2>
+            <div class="student-course-grid">
+              <div class="student-course-block">
+                <span class="student-label" data-i18n="student.courseType">Loai bang</span>
+                <strong id="studentCourseType">-</strong>
+              </div>
+              <div class="student-course-block">
+                <span class="student-label" data-i18n="student.examName">De thi duoc giao</span>
+                <strong id="studentAssignedExam">-</strong>
+              </div>
+              <div class="student-course-block">
+                <span class="student-label" data-i18n="student.passTarget">Muc diem can dat</span>
+                <strong id="studentPassScore">-</strong>
+              </div>
+              <div class="student-course-block">
+                <span class="student-label" data-i18n="student.examDuration">Thoi gian lam bai</span>
+                <strong id="studentDuration">-</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="dashboard-card h-100">
+            <h2 class="h4 mb-3" data-i18n="student.nextStepTitle">Cac buoc tiep theo</h2>
+            <ul class="feature-list mb-0">
+              <li data-i18n="student.nextStepOne">Xem thong tin khoa hoc va ten de thi o phan tren.</li>
+              <li data-i18n="student.nextStepTwo">Lam bai thi va nop bai mot cach binh tinh, he thong se cham diem ngay.</li>
+              <li data-i18n="student.nextStepThree">Neu chua dat, ban co the xem lai dap an va lam lai de on tap them.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard-card mb-4" id="studentHistory">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+          <div>
+            <h2 class="h4 mb-1" data-i18n="student.historyTitle">Lich su bai thi cua toi</h2>
+            <p class="text-muted mb-0" data-i18n="student.historyCopy">Hoc vien co the xem trang thai dat hay chua dat va mo lai chi tiet tung lan thi.</p>
+          </div>
+          <span class="compact-badge" id="studentHistoryBadge">0</span>
+        </div>
+        <div class="table-shell">
+          <table class="table align-middle admin-table">
+            <thead>
+              <tr>
+                <th data-i18n="student.historyAttempt">Lan thi</th>
+                <th data-i18n="student.historyExam">De thi</th>
+                <th data-i18n="student.historyScore">Diem</th>
+                <th data-i18n="student.historyStatus">Trang thai</th>
+                <th data-i18n="student.historyAction">Chi tiet</th>
+              </tr>
+            </thead>
+            <tbody id="studentHistoryTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="exam-card" id="studentExamSection">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-center mb-4">
+          <div>
+            <span class="section-badge mb-2" data-i18n="exam.title">Phong thi online</span>
+            <h2 class="h2 mb-1" id="examTitle">Driving License Theory Test</h2>
+            <p class="text-muted mb-0"><span id="examMeta"></span></p>
+            <p class="small text-muted mb-0 mt-2" id="attemptInfo"></p>
+            <p class="small text-muted mb-0" id="latestAttemptInfo"></p>
+          </div>
+          <div class="timer-pill"><i class="fa-regular fa-clock"></i><span id="examTimerMirror">20:00</span></div>
+        </div>
+        <div id="questionList"></div>
+        <div class="text-end mt-4"><button class="btn btn-primary" type="button" id="submitExamButton" data-i18n="exam.submit">Nop bai</button></div>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/src/js/common.js"></script>
+  <script src="/src/js/i18n.js"></script>
+  <script src="/src/js/exam.js"></script>
+</body>
+</html>
