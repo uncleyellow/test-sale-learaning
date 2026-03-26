@@ -41,6 +41,8 @@
       <div class="student-nav-pills mb-4">
         <a class="student-nav-pill" href="#studentOverview" data-i18n="student.overviewTab">Tong quan</a>
         <a class="student-nav-pill" href="#studentCourses" data-i18n="student.courseTab">Khoa hoc cua toi</a>
+        <a class="student-nav-pill" href="#studentLearningPath">Lo trinh video</a>
+        <a class="student-nav-pill" href="#studentSimulationSection">Thi mo phong</a>
         <a class="student-nav-pill" href="#studentHistory" data-i18n="student.historyTab">Lich su thi</a>
         <a class="student-nav-pill" href="#studentExamSection" data-i18n="student.examTab">Lam bai thi</a>
       </div>
@@ -105,6 +107,25 @@
         </div>
       </section>
 
+      <section class="row g-4 mb-4" id="studentLearningPath">
+        <div class="col-lg-4">
+          <div class="dashboard-card h-100">
+            <h2 class="h4 mb-2">Lo trinh mo phong</h2>
+            <p class="text-muted mb-3">Hoc theo thu tu: xem video, lam bai tap mo phong, dat diem se mo khoa bai tiep theo.</p>
+            <div class="progress mb-3" role="progressbar" aria-label="Learning progress" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" id="learningProgressBar" style="width: 0%">0%</div>
+            </div>
+            <div id="learningProgressText" class="small text-muted mb-3">Da hoan thanh 0/0 bai</div>
+            <div id="lessonList" class="lesson-list"></div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="dashboard-card h-100">
+            <div id="lessonContent"></div>
+          </div>
+        </div>
+      </section>
+
       <section class="dashboard-card mb-4" id="studentHistory">
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
           <div>
@@ -127,6 +148,25 @@
             <tbody id="studentHistoryTable"></tbody>
           </table>
         </div>
+      </section>
+
+      <section class="dashboard-card mb-4" id="studentSimulationSection">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-center mb-3">
+          <div>
+            <span class="section-badge mb-2">Thi mo phong Space</span>
+            <h2 class="h3 mb-1" id="simulationExamTitle">Dang tai de mo phong...</h2>
+            <p class="text-muted mb-0" id="simulationExamMeta"></p>
+          </div>
+          <div class="compact-badge">
+            <i class="fa-solid fa-keyboard"></i>
+            <span>Nhan phim <strong>Space</strong> dung khoang nguy hiem</span>
+          </div>
+        </div>
+        <div id="simulationClipList"></div>
+        <div class="text-end mt-3">
+          <button class="btn btn-primary" type="button" id="submitSimulationButton">Nop bai mo phong</button>
+        </div>
+        <div id="simulationAttemptSummary" class="mt-3"></div>
       </section>
 
       <section class="exam-card" id="studentExamSection">

@@ -3,6 +3,13 @@ const SHEET_HEADERS = {
   users: ['id', 'name', 'email', 'password_hash', 'role', 'course_type', 'created_at'],
   exams: ['id', 'title', 'pass_score', 'total_questions', 'duration_minutes', 'active'],
   questions: ['id', 'exam_id', 'question', 'option_a', 'option_b', 'option_c', 'option_d', 'correct_answer', 'is_critical', 'explanation'],
+  lessons: ['id', 'course_type', 'title', 'description', 'order_no', 'video_url', 'pass_score', 'active'],
+  lesson_questions: ['id', 'lesson_id', 'question', 'option_a', 'option_b', 'option_c', 'option_d', 'correct_answer', 'explanation'],
+  lesson_watches: ['id', 'user_id', 'lesson_id', 'watched_at'],
+  lesson_attempts: ['id', 'user_id', 'lesson_id', 'attempt_no', 'score', 'total', 'pass_score', 'passed', 'submitted_at', 'answers_json', 'details_json'],
+  simulation_exams: ['id', 'course_type', 'title', 'description', 'pass_score', 'total_clips', 'active'],
+  simulation_clips: ['id', 'exam_id', 'title', 'video_url', 'order_no', 'trigger_start_sec', 'trigger_end_sec', 'active'],
+  simulation_attempts: ['id', 'user_id', 'exam_id', 'attempt_no', 'score', 'passed', 'submitted_at', 'answers_json', 'details_json'],
   exam_results: ['id', 'user_id', 'exam_id', 'attempt_no', 'score', 'passed', 'failed_due_critical', 'submitted_at', 'answers_json'],
   visits: ['id', 'ip', 'page', 'lang', 'visited_at']
 };
@@ -25,6 +32,27 @@ const SEED_ROWS = {
     ['question_002', 'exam_b2_001', 'Khi chuyen lan can thuc hien thao tac nao?', 'Chi can nhin guong chieu hau', 'Bat xi nhan va quan sat diem mu', 'Tang toc roi tat dau', 'Khong can quan sat', 'B', 'false', 'Bat xi nhan va quan sat diem mu giup tai xe chuyen lan an toan hon va tranh va cham.'],
     ['question_003', 'exam_a1_001', 'Nguoi dieu khien xe may can mang theo gi?', 'Chi can CCCD', 'Chi can dang ky xe', 'GPLX va giay to lien quan', 'Khong can giay to', 'C', 'false', 'Nguoi lai xe can mang day du giay phep lai xe va giay to lien quan de xuat trinh khi can.']
   ],
+  lessons: [
+    ['lesson_b2_001', 'B2', 'Bai 1: Sa hinh co ban', 'Lam quen thao tac sa hinh co ban.', '1', '/assets/videos/b2-lesson-01.mp4', '2', 'true'],
+    ['lesson_b2_002', 'B2', 'Bai 2: Xu ly duong truong', 'Quan sat bien bao va giu khoang cach.', '2', '/assets/videos/b2-lesson-02.mp4', '2', 'true'],
+    ['lesson_b2_003', 'B2', 'Bai 3: Tinh huong nguy hiem', 'Mo phong xu ly tinh huong nguy hiem.', '3', '/assets/videos/b2-lesson-03.mp4', '2', 'true']
+  ],
+  lesson_questions: [
+    ['lesson_q_001', 'lesson_b2_001', 'Truoc khi de-pa trong bai sa hinh, ban can?', 'Nhan ga manh', 'Kiem tra guong, day an toan va quan sat', 'Tat den xe', 'Bam coi', 'B', 'Kiem tra guong va day an toan la bat buoc.'],
+    ['lesson_q_002', 'lesson_b2_001', 'Loi pho bien trong bai ghep doc la?', 'Danh lai sai thoi diem', 'Di so 1', 'Nhin guong', 'Di cham', 'A', 'Danh lai sai thoi diem de cham vach va truot bai.'],
+    ['lesson_q_003', 'lesson_b2_002', 'Gap xe phanh gap phia truoc, ban nen?', 'Nhan ga', 'Phanh giam toc va giu khoang cach', 'Re gap', 'Tat den', 'B', 'Phanh co kiem soat va giu khoang cach giup tranh va cham.']
+  ],
+  lesson_watches: [],
+  lesson_attempts: [],
+  simulation_exams: [
+    ['sim_b2_001', 'B2', 'De thi mo phong B2 - Co ban', 'Mo phong tinh huong giao thong, bam Space dung thoi diem.', '9', '3', 'true']
+  ],
+  simulation_clips: [
+    ['sim_clip_001', 'sim_b2_001', 'Tinh huong 1: Xe cat ngang', '/assets/videos/sim-b2-01.mp4', '1', '3.5', '5.2', 'true'],
+    ['sim_clip_002', 'sim_b2_001', 'Tinh huong 2: Nguoi di bo bang qua', '/assets/videos/sim-b2-02.mp4', '2', '4.2', '6.0', 'true'],
+    ['sim_clip_003', 'sim_b2_001', 'Tinh huong 3: Xe truoc phanh gap', '/assets/videos/sim-b2-03.mp4', '3', '2.8', '4.0', 'true']
+  ],
+  simulation_attempts: [],
   exam_results: [
     ['result_001', 'student_001', 'exam_b2_001', '1', '27', 'true', 'false', '2026-03-24T12:30:00.000Z', '{"question_001":"B","question_002":"B"}']
   ],

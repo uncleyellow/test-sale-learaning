@@ -19,6 +19,34 @@
       "name": "questions",
       "headers": ["id", "exam_id", "question", "option_a", "option_b", "option_c", "option_d", "correct_answer", "is_critical", "explanation"]
     },
+    "lessons": {
+      "name": "lessons",
+      "headers": ["id", "course_type", "title", "description", "order_no", "video_url", "pass_score", "active"]
+    },
+    "lesson_questions": {
+      "name": "lesson_questions",
+      "headers": ["id", "lesson_id", "question", "option_a", "option_b", "option_c", "option_d", "correct_answer", "explanation"]
+    },
+    "lesson_watches": {
+      "name": "lesson_watches",
+      "headers": ["id", "user_id", "lesson_id", "watched_at"]
+    },
+    "lesson_attempts": {
+      "name": "lesson_attempts",
+      "headers": ["id", "user_id", "lesson_id", "attempt_no", "score", "total", "pass_score", "passed", "submitted_at", "answers_json", "details_json"]
+    },
+    "simulation_exams": {
+      "name": "simulation_exams",
+      "headers": ["id", "course_type", "title", "description", "pass_score", "total_clips", "active"]
+    },
+    "simulation_clips": {
+      "name": "simulation_clips",
+      "headers": ["id", "exam_id", "title", "video_url", "order_no", "trigger_start_sec", "trigger_end_sec", "active"]
+    },
+    "simulation_attempts": {
+      "name": "simulation_attempts",
+      "headers": ["id", "user_id", "exam_id", "attempt_no", "score", "passed", "submitted_at", "answers_json", "details_json"]
+    },
     "exam_results": {
       "name": "exam_results",
       "headers": ["id", "user_id", "exam_id", "attempt_no", "score", "passed", "failed_due_critical", "submitted_at", "answers_json"]

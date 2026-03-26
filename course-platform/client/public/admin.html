@@ -128,6 +128,7 @@
         <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#paneStudents" type="button" data-i18n="admin.students">Hoc vien</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#paneExams" type="button" data-i18n="admin.exams">De thi</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#paneQuestions" type="button" data-i18n="admin.questions">Cau hoi</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#paneSimulation" type="button">Thi mo phong</button></li>
       </ul>
 
       <div class="tab-content">
@@ -301,6 +302,90 @@
             </div>
           </div>
         </section>
+
+        <section class="tab-pane fade" id="paneSimulation">
+          <div class="row g-4">
+            <div class="col-xl-5">
+              <div class="dashboard-card mb-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                  <div>
+                    <h2 class="h4 mb-1">De thi mo phong</h2>
+                    <p class="text-muted mb-0">Admin tao nhieu de mo phong theo khoa hoc va diem dat.</p>
+                  </div>
+                  <button class="btn btn-primary btn-sm" type="button" id="simulationExamQuickAddButton">
+                    <i class="fa-solid fa-plus"></i> Them de
+                  </button>
+                </div>
+                <div class="table-shell">
+                  <table class="table align-middle admin-table">
+                    <thead>
+                      <tr>
+                        <th>Tieu de</th>
+                        <th>Khoa</th>
+                        <th>Diem dat</th>
+                        <th>Thao tac</th>
+                      </tr>
+                    </thead>
+                    <tbody id="simulationExamTable"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="dashboard-card">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                  <div>
+                    <h2 class="h4 mb-1">Ket qua mo phong</h2>
+                    <p class="text-muted mb-0">Theo doi ket qua dat/chua dat theo tung lan thi.</p>
+                  </div>
+                </div>
+                <div class="table-shell">
+                  <table class="table align-middle admin-table">
+                    <thead>
+                      <tr>
+                        <th>Hoc vien</th>
+                        <th>De</th>
+                        <th>Diem</th>
+                        <th>Trang thai</th>
+                      </tr>
+                    </thead>
+                    <tbody id="simulationAttemptTable"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-7">
+              <div class="dashboard-card">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                  <div>
+                    <h2 class="h4 mb-1">Video mo phong</h2>
+                    <p class="text-muted mb-0">Set khung thoi gian hop le de hoc vien bam Space.</p>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <select class="form-select" id="simulationClipExamFilter" style="min-width: 220px;"></select>
+                    <button class="btn btn-primary btn-sm" type="button" id="simulationClipQuickAddButton">
+                      <i class="fa-solid fa-plus"></i> Them video
+                    </button>
+                  </div>
+                </div>
+                <div class="table-shell">
+                  <table class="table align-middle admin-table">
+                    <thead>
+                      <tr>
+                        <th>Video</th>
+                        <th>Thu tu</th>
+                        <th>Khung Space (s)</th>
+                        <th>Trang thai</th>
+                        <th>Thao tac</th>
+                      </tr>
+                    </thead>
+                    <tbody id="simulationClipTable"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </main>
@@ -412,6 +497,69 @@
             <button class="btn btn-danger flex-grow-1" type="button" id="confirmModalAction" data-i18n="admin.confirmAction">Xac nhan</button>
             <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal" data-i18n="admin.cancelEdit">Huy</button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="simulationExamModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content admin-modal">
+        <div class="modal-header border-0 pb-0">
+          <div>
+            <h2 class="modal-title h4 mb-1" id="simulationExamModalTitle">Tao hoac sua de mo phong</h2>
+            <p class="text-muted mb-0">Thong tin de mo phong se duoc dung cho hoc vien thi Space.</p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="createSimulationExamForm" class="row g-3">
+            <input type="hidden" name="id" id="simulationExamId">
+            <div class="col-md-8"><label class="form-label">Ten de mo phong</label><input class="form-control" type="text" name="title" required></div>
+            <div class="col-md-4"><label class="form-label">Khoa hoc</label><select class="form-select" name="course_type" required><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option></select></div>
+            <div class="col-12"><label class="form-label">Mo ta</label><textarea class="form-control" name="description" rows="2"></textarea></div>
+            <div class="col-md-6"><label class="form-label">Diem dat</label><input class="form-control" type="number" name="pass_score" min="1" required></div>
+            <div class="col-md-6"><label class="form-label">Tong clip</label><input class="form-control" type="number" name="total_clips" min="1" required></div>
+            <div class="col-12"><div class="form-check"><input class="form-check-input" type="checkbox" id="simulationExamActive" checked><label class="form-check-label" for="simulationExamActive">Kich hoat de</label></div></div>
+            <div class="col-12">
+              <div class="form-actions">
+                <button class="btn btn-primary flex-grow-1" type="submit">Luu de mo phong</button>
+                <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Huy</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="simulationClipModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content admin-modal">
+        <div class="modal-header border-0 pb-0">
+          <div>
+            <h2 class="modal-title h4 mb-1" id="simulationClipModalTitle">Tao hoac sua video mo phong</h2>
+            <p class="text-muted mb-0">Nhap duong dan video va khung giay cho phim Space.</p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="createSimulationClipForm" class="row g-3">
+            <input type="hidden" name="id" id="simulationClipId">
+            <div class="col-md-7"><label class="form-label">De mo phong</label><select class="form-select" name="exam_id" id="simulationClipExamId" required></select></div>
+            <div class="col-md-5"><label class="form-label">Thu tu clip</label><input class="form-control" type="number" name="order_no" min="1" required></div>
+            <div class="col-12"><label class="form-label">Ten clip</label><input class="form-control" type="text" name="title" required></div>
+            <div class="col-12"><label class="form-label">Duong dan video (assets)</label><input class="form-control" type="text" name="video_url" placeholder="/assets/videos/sim-b2-01.mp4" required></div>
+            <div class="col-md-6"><label class="form-label">Space bat dau (giay)</label><input class="form-control" type="number" step="0.1" min="0" name="trigger_start_sec" required></div>
+            <div class="col-md-6"><label class="form-label">Space ket thuc (giay)</label><input class="form-control" type="number" step="0.1" min="0" name="trigger_end_sec" required></div>
+            <div class="col-12"><div class="form-check"><input class="form-check-input" type="checkbox" id="simulationClipActive" checked><label class="form-check-label" for="simulationClipActive">Kich hoat clip</label></div></div>
+            <div class="col-12">
+              <div class="form-actions">
+                <button class="btn btn-primary flex-grow-1" type="submit">Luu video mo phong</button>
+                <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Huy</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

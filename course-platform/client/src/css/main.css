@@ -514,6 +514,87 @@ body {
   font-size: 1.4rem;
 }
 
+.lesson-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.lesson-item-btn {
+  width: 100%;
+  border: 1px solid rgba(16, 37, 66, 0.12);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff, #f9fbff);
+  padding: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-align: left;
+}
+
+.lesson-item-btn.active {
+  border-color: rgba(13, 71, 161, 0.35);
+  box-shadow: 0 10px 24px rgba(13, 71, 161, 0.12);
+}
+
+.lesson-item-btn.locked {
+  opacity: 0.72;
+}
+
+.lesson-item-order {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  background: rgba(13, 71, 161, 0.1);
+  color: var(--brand-blue);
+  flex-shrink: 0;
+}
+
+.lesson-item-main {
+  display: grid;
+  flex: 1;
+}
+
+.lesson-item-main small {
+  color: var(--muted);
+}
+
+.lesson-video-shell {
+  border-radius: 20px;
+  border: 1px solid rgba(16, 37, 66, 0.1);
+  padding: 1rem;
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+}
+
+.lesson-video {
+  width: 100%;
+  border-radius: 14px;
+  background: #0f172a;
+  max-height: 440px;
+}
+
+.lesson-quiz-shell {
+  border-radius: 20px;
+  border: 1px solid rgba(16, 37, 66, 0.1);
+  padding: 1rem;
+  background: #fff;
+}
+
+.lesson-quiz-questions.locked {
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+.simulation-clip-card {
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+}
+
+.simulation-clip-card .lesson-video {
+  margin-top: 0.4rem;
+}
+
 .result-state {
   font-size: clamp(2rem, 3vw, 3rem);
   font-weight: 900;

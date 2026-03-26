@@ -100,6 +100,88 @@
       "explanation": "Nguoi lai xe can mang day du giay phep lai xe va giay to lien quan de xuat trinh khi can."
     }
   ],
+  "lessons": [
+    {
+      "id": "lesson_b2_001",
+      "course_type": "B2",
+      "title": "Bai 1: Sa hinh co ban",
+      "description": "Lam quen thao tac sa hinh co ban.",
+      "order_no": 1,
+      "video_url": "/assets/videos/b2-lesson-01.mp4",
+      "pass_score": 2,
+      "active": true
+    },
+    {
+      "id": "lesson_b2_002",
+      "course_type": "B2",
+      "title": "Bai 2: Xu ly duong truong",
+      "description": "Quan sat bien bao va giu khoang cach.",
+      "order_no": 2,
+      "video_url": "/assets/videos/b2-lesson-02.mp4",
+      "pass_score": 2,
+      "active": true
+    }
+  ],
+  "lesson_questions": [
+    {
+      "id": "lesson_q_001",
+      "lesson_id": "lesson_b2_001",
+      "question": "Truoc khi de-pa trong bai sa hinh, ban can?",
+      "option_a": "Nhan ga manh",
+      "option_b": "Kiem tra guong, day an toan va quan sat",
+      "option_c": "Tat den xe",
+      "option_d": "Bam coi",
+      "correct_answer": "B",
+      "explanation": "Kiem tra guong va day an toan la bat buoc."
+    },
+    {
+      "id": "lesson_q_002",
+      "lesson_id": "lesson_b2_001",
+      "question": "Loi pho bien trong bai ghep doc la?",
+      "option_a": "Danh lai sai thoi diem",
+      "option_b": "Di so 1",
+      "option_c": "Nhin guong",
+      "option_d": "Di cham",
+      "correct_answer": "A",
+      "explanation": "Danh lai sai thoi diem de cham vach va truot bai."
+    }
+  ],
+  "lesson_watches": [],
+  "lesson_attempts": [],
+  "simulation_exams": [
+    {
+      "id": "sim_b2_001",
+      "course_type": "B2",
+      "title": "De thi mo phong B2 - Co ban",
+      "description": "Mo phong tinh huong giao thong, bam Space dung thoi diem.",
+      "pass_score": 9,
+      "total_clips": 3,
+      "active": true
+    }
+  ],
+  "simulation_clips": [
+    {
+      "id": "sim_clip_001",
+      "exam_id": "sim_b2_001",
+      "title": "Tinh huong 1: Xe cat ngang",
+      "video_url": "/assets/videos/sim-b2-01.mp4",
+      "order_no": 1,
+      "trigger_start_sec": 3.5,
+      "trigger_end_sec": 5.2,
+      "active": true
+    },
+    {
+      "id": "sim_clip_002",
+      "exam_id": "sim_b2_001",
+      "title": "Tinh huong 2: Nguoi di bo bang qua",
+      "video_url": "/assets/videos/sim-b2-02.mp4",
+      "order_no": 2,
+      "trigger_start_sec": 4.2,
+      "trigger_end_sec": 6.0,
+      "active": true
+    }
+  ],
+  "simulation_attempts": [],
   "exam_results": [
     {
       "id": "result_001",

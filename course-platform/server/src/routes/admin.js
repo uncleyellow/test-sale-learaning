@@ -17,6 +17,28 @@ router.get("/results", async (req, res, next) => {
   }
 });
 
+router.get("/learning-attempts", async (req, res, next) => {
+  try {
+    const [attemptsResponse, usersResponse, lessonsResponse] = await Promise.all([
+      sheetsService.getLessonAttempts(),
+      sheetsService.getUsers(),
+      sheetsService.getLessons()
+    ]);
+
+    const users = usersResponse.data || [];
+    const lessons = lessonsResponse.data || [];
+    const data = (attemptsResponse.data || []).map((item) => ({
+      ...item,
+      student_name: (users.find((user) => user.id === item.user_id) || {}).name || item.user_id,
+      lesson_title: (lessons.find((lesson) => lesson.id === item.lesson_id) || {}).title || item.lesson_id
+    }));
+
+    res.json({ success: true, data });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/stats", async (req, res, next) => {
   try {
     const filters = {
@@ -154,6 +176,184 @@ router.delete("/questions/:id", async (req, res, next) => {
   try {
     const response = await sheetsService.deleteQuestion(req.params.id);
     res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/lessons", async (req, res, next) => {
+  try {
+    const response = await sheetsService.getLessons({
+      course_type: normalizeCourseType(req.query.course_type || ""),
+      include_inactive: true
+    });
+    res.json({ success: true, data: response.data || [] });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/lessons", async (req, res, next) => {
+  try {
+    const response = await sheetsService.upsertLesson(req.body);
+    res.status(201).json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put("/lessons/:id", async (req, res, next) => {
+  try {
+    const response = await sheetsService.upsertLesson({ ...req.body, id: req.params.id });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/lessons/:id", async (req, res, next) => {
+  try {
+    const response = await sheetsService.deleteLesson(req.params.id);
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/lesson-questions", async (req, res, next) => {
+  try {
+    const lessonId = String(req.query.lesson_id || "");
+    if (!lessonId) {
+      return res.status(400).json({ success: false, message: "lesson_id is required" });
+    }
+    const response = await sheetsService.getLessonQuestions(lessonId);
+    return res.json({ success: true, data: response.data || [] });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+router.post("/lesson-questions", async (req, res, next) => {
+  try {
+    const response = await sheetsService.upsertLessonQuestion(req.body);
+    res.status(201).json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put("/lesson-questions/:id", async (req, res, next) => {
+  try {
+    const response = await sheetsService.upsertLessonQuestion({ ...req.body, id: req.params.id });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/lesson-questions/:id", async (req, res, next) => {
+  try {
+    const response = await sheetsService.deleteLessonQuestion(req.params.id);
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/simulation-exams", async (req, res, next) => {
+  try {
+    const response = await sheetsService.getSimulationExams({
+      course_type: normalizeCourseType(req.query.course_type || ""),
+      include_inactive: true
+    });
+    res.json({ success: true, data: response.data || [] });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/simulation-exams", async (req, res, next) => {
+  try {
+    const response = await sheetsService.upsertSimulationExam(req.body);
+    res.status(201).json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put("/simulation-exams/:id", async (req, res, next) => {
+  try {
+    const response = await sheetsService.upsertSimulationExam({ ...req.body, id: req.params.id });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/simulation-exams/:id", async (req, res, next) => {
+  try {
+    const response = await sheetsService.deleteSimulationExam(req.params.id);
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/simulation-clips", async (req, res, next) => {
+  try {
+    const examId = String(req.query.exam_id || "");
+    if (!examId) {
+      return res.status(400).json({ success: false, message: "exam_id is required" });
+    }
+    const response = await sheetsService.getSimulationClips(examId, true);
+    return res.json({ success: true, data: response.data || [] });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+router.post("/simulation-clips", async (req, res, next) => {
+  try {
+    const response = await sheetsService.upsertSimulationClip(req.body);
+    res.status(201).json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put("/simulation-clips/:id", async (req, res, next) => {
+  try {
+    const response = await sheetsService.upsertSimulationClip({ ...req.body, id: req.params.id });
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/simulation-clips/:id", async (req, res, next) => {
+  try {
+    const response = await sheetsService.deleteSimulationClip(req.params.id);
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/simulation-attempts", async (req, res, next) => {
+  try {
+    const [attemptsResponse, usersResponse, examsResponse] = await Promise.all([
+      sheetsService.getSimulationAttempts(),
+      sheetsService.getUsers(),
+      sheetsService.getSimulationExams({ include_inactive: true })
+    ]);
+    const users = usersResponse.data || [];
+    const exams = examsResponse.data || [];
+    const data = (attemptsResponse.data || []).map((item) => ({
+      ...item,
+      student_name: (users.find((user) => user.id === item.user_id) || {}).name || item.user_id,
+      exam_title: (exams.find((exam) => exam.id === item.exam_id) || {}).title || item.exam_id
+    }));
+    res.json({ success: true, data });
   } catch (error) {
     next(error);
   }
